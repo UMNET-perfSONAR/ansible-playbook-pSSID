@@ -4,5 +4,5 @@
   hosts:
     - pSSID-testpoints
   roles:
-    - ansible-role-pSSID-testpoint
+    - ansible-role-pSSID
     - ansible-role-rabbitmq

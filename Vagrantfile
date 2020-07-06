@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
 	"ansible_become" => "True",
 	"ansible_become_user" => "root",
 	"ansible_become_method" => "sudo"
-      }
+      },
       "pSSID-testpoints" => ["pi-point"],
       #"pSSID-testpoints:vars" => {
 	#"perfsonar_archive_auth_interfaces" => "{{ ansible_all_ipv4_addresses }}",
