@@ -2,9 +2,13 @@ playbook for pSSID deployment and config
 
 **Quick Start**:
 
-Clone this repository:
+Develop roles:
 
 ```
+cd roles
+git clone git@github.com:UMNET-perfSONAR/ansible-role-pSSID.git
+git clone git@github.com:UMNET-perfSONAR/ansible-role-rabbitmq.git
+cd ..
 ```
 
 Get the required roles (note that we ignore errors so we can run this multiple times):
@@ -13,14 +17,14 @@ Get the required roles (note that we ignore errors so we can run this multiple t
 ansible-galaxy install -r  requirements.yml --ignore-errors
 ```
 
-Set up your inventory.  Connection variables can be added here as well.
+Get the environment
 
 ```
-vi inventory/hosts
+vagrant up
 ```
 
-Run the playbook:
+Run the playbook again to test changes:
 
 ```
-ansible-playbook pSSID.yml
+vagrant provision
 ```
