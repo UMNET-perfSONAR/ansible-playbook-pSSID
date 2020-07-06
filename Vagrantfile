@@ -5,8 +5,8 @@
 
 hosts = [
       
-      [ "pi-point",           "10.0.0.3" ],
-      [ "elastic",            "10.0.0.2" ]
+      [ "pi-point",           "10.0.0.3" ]
+      #[ "elastic",            "10.0.0.2" ]
       #[ "testpoint",          "10.0.0.4" ]
 
       # This is built last so it can provision the others
@@ -15,7 +15,9 @@ hosts = [
 
 # make this work properly
 # XXX automate UID
-private_network_name = "template-UID"
+private_network_name = "pSSID-core-"
+private_network_name << ENV['USER']
+
 
 etc_hosts = hosts.map { |host, ip| "#{ip} #{host}" }.join("\n")
 
@@ -58,11 +60,6 @@ Vagrant.configure("2") do |config|
         mv -f /etc/hosts.build /etc/hosts
 	
       SHELL
-
-      config.vm.provision "ansible" do |ansible|
-	ansible.verbose = "v"
-	ansible.playbook = "vagrant.yml"
-      end
       
       if name == "elastic"
         host.vm.network "forwarded_port", guest: 15672, host: "15672", host_ip: "198.111.224.158"
@@ -73,4 +70,23 @@ Vagrant.configure("2") do |config|
        
    end  # Config
   end  # hosts.each
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.groups = {
+      "all:vars" => {
+	"ansible_become" => "True",
+	"ansible_become_user" => "root",
+	"ansible_become_method" => "sudo"
+      }
+      "pSSID-testpoints" => ["pi-point"],
+      #"pSSID-testpoints:vars" => {
+	#"perfsonar_archive_auth_interfaces" => "{{ ansible_all_ipv4_addresses }}",
+	#"perfsonar_archive_hosts" => "{{ groups['ps-archives'] }}"
+      #},
+    }
+    #ansible.limit = "all",
+    ansible.playbook = "pSSID.yml"
+  end
+
 end
