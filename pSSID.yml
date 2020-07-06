@@ -1,0 +1,8 @@
+# pSSID-core.yml main perfSONAR config
+
+- name: pSSID deploy
+  hosts:
+    - pSSID-testpoints
+  roles:
+    - ansible-role-pSSID-testpoint
+    - ansible-role-rabbitmq
