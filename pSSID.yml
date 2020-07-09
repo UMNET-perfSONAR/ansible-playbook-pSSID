@@ -6,3 +6,5 @@
   roles:
     - ansible-role-pSSID
     - ansible-role-rabbitmq
+    - ansible-role-perfsonar-testpoint
+    - ansible-role-perfsonar-installer
