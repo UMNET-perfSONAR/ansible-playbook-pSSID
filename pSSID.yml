@@ -1,5 +1,11 @@
 # pSSID-core.yml main perfSONAR config
 
+- name: elastic deploy
+  hosts:
+    - elastic
+  roles:
+    - ansible-role-elastic
+
 - name: pSSID deploy
   hosts:
     - pSSID-testpoints
