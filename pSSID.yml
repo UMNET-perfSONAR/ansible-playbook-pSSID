@@ -1,5 +1,6 @@
 # pSSID-core.yml main perfSONAR config
 
+# TODO: should elastic be deployed with a separate playbook?
 - name: elastic deploy
   hosts:
     - elastic
@@ -13,4 +14,5 @@
     - ansible-role-pSSID
     - ansible-role-rabbitmq
     - ansible-role-perfsonar-testpoint
+    # TODO: is the installer needed here?
     - ansible-role-perfsonar-installer
